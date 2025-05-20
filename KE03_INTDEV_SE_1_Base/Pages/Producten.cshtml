@@ -1,0 +1,26 @@
+﻿@page
+@model KE03_INTDEV_SE_1.Pages.ProductenModel
+@{
+}
+<h1>Producten</h1>
+<p>Lorum ipsums sd lkfs dfsdsfd jkl sd</p>
+
+<div class="container-fluid p-0">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Naam</th>
+				<th>Beschrijving</th>
+				<th>Prijs</th>
+			</tr>
+		</thead>
+		@foreach (var c in Model.Product)
+		{
+			<tr onclick="">
+				<td>@Html.DisplayName(c.Name)</td>
+				<td>@Html.DisplayName(c.Description)</td>
+				<td>@c.Price</td>
+			</tr>
+		}
+	</table>
+</div>
