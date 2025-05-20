@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35919.96
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KE03_INTDEV_SE_1_Base", "KE03_INTDEV_SE_1_Base\KE03_INTDEV_SE_1_Base.csproj", "{14B4DD94-F23A-4959-9CF2-1C931C8BF179}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KE03_INTDEV_SE_1", "KE03_INTDEV_SE_1_Base\KE03_INTDEV_SE_1.csproj", "{14B4DD94-F23A-4959-9CF2-1C931C8BF179}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{6AFC88EF-4EA9-4D51-B5B6-B8DE48583E8A}"
 EndProject

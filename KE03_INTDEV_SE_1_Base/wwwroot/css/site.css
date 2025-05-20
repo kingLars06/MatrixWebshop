@@ -20,3 +20,79 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+body {
+    background-color: #ffffff;
+    color: #222222;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.hero {
+/*    background: url('/images/hero-matrix.jpg') no-repeat center center/cover;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #00ff41;
+    text-shadow: 0 0 5px #000;
+    text-align: center;*/
+}
+
+.hero-text h1 {
+    font-size: 3em;
+    margin-bottom: 0.5em;
+}
+
+.btn-primary {
+    background-color: #00ff41;
+    color: #000;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+    .btn-primary:hover {
+        background-color: #33ff77;
+    }
+
+.intro, .cta {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.gallery {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+    .gallery img {
+        width: 300px;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+    }
+
+.btn-secondary {
+    background-color: #121212;
+    color: #00ff41;
+    padding: 10px 20px;
+    text-decoration: none;
+    border: 2px solid #00ff41;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: all 0.3s;
+    box-shadow: rgb(115 255 81) 0px -1px 20px 9px;
+}
+
+    .btn-secondary:hover {
+        background-color: #1a1a1a;
+        color: #33ff77;
+        border-color: #33ff77;
+    }
