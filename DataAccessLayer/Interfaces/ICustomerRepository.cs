@@ -12,6 +12,8 @@ namespace DataAccessLayer.Interfaces
         public IEnumerable<Customer> GetAllCustomers();
 
         public Customer? GetCustomerById(int id);
+        public Customer? GetCustomerByName(string name);
+
 
         public void AddCustomer(Customer customer);
 
