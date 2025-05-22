@@ -1,0 +1,24 @@
+﻿@page "{id:int?}"
+@model KE03_INTDEV_SE_1.Pages.ProductModel
+@{
+    var product = Model.Product;
+}
+
+<div class="container mt-4">
+    <a href="/Producten" class="btn btn-link mb-3">&larr; Terug naar producten</a>
+
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <img src="../imgs/sfeer2.jpg" alt="@product.Name" class="img-fluid rounded shadow">
+        </div>
+        <div class="col-md-6 d-flex flex-column justify-content-evenly">
+            <h2>@product.Name</h2>
+            <p class="text-muted">@product.Description</p>
+            <h4 class="text-primary">
+                @String.Format("{0:C}", product.Price)
+            </h4>
+            <button class="btn btn-primary btn-lg mt-4">In winkelwagen</button>
+        </div>
+    </div>
+</div>
+

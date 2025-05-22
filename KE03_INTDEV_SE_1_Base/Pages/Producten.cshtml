@@ -6,24 +6,19 @@
 <h1>Producten</h1>
 <p>Lorum ipsums sd lkfs dfsdsfd jkl sd</p>
 
-<div class="container-fluid p-0">
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Naam</th>
-				<th>Beschrijving</th>
-				<th>Prijs</th>
-			</tr>
-		</thead>
-		@foreach (var c in Model.Product)
-		{
-			<tr onclick="">
-				<td>@Html.DisplayName(c.Name)</td>
-				<td>@Html.DisplayName(c.Description)</td>
-				<td>@c.Price</td>
-				@* <td><img src="https://www.ozziecollectables.com/cdn/shop/files/MASMTXHS001-70--Matrix-Nebuchadnezzar-01.png?v=1741521909&width=1445" alt="Alternate Text" /></td> *@
-
-			</tr>
-		}
-	</table>
+<div class="container-fluid p-4">
+    <div class="d-flex flex-wrap justify-content-start gap-3">
+        @foreach (var c in Model.Product)
+        {
+            <div class="card" onclick="window.location.href = '/Product?id=@c.Id'" style="width: 18rem; cursor:pointer; padding-bottom:30px; margin-bottom: 10px">
+                <img src="../imgs/sfeer1.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">@c.Name <span class="float-end">@c.Price</span></h5>
+                    <p class="card-text flex-grow-1 mb-2">@c.Description</p>
+                    <a href="#" onclick="event.stopPropagation()" class="btn btn-primary position-absolute" style="bottom: 10px">In winkelwagen</a>
+                </div>
+            </div>
+        }
+    </div>
 </div>
+@* https://learn.microsoft.com/en-us/aspnet/core/tutorials/razor-pages/da1?view=aspnetcore-9.0 *@
