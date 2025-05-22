@@ -15,7 +15,7 @@
                 <div class="card-body">
                     <h5 class="card-title">@c.Name <span class="float-end">@c.Price</span></h5>
                     <p class="card-text flex-grow-1 mb-2">@c.Description</p>
-                    <a href="#" onclick="event.stopPropagation()" class="btn btn-primary position-absolute" style="bottom: 10px">In winkelwagen</a>
+                    <button onclick="event.stopPropagation(); addToCart(@c.Id)" class="btn btn-primary position-absolute" style="bottom: 10px">In winkelmand</button>
                 </div>
             </div>
         }

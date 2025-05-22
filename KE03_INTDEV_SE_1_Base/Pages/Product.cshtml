@@ -17,7 +17,7 @@
             <h4 class="text-primary">
                 @String.Format("{0:C}", product.Price)
             </h4>
-            <button class="btn btn-primary btn-lg mt-4">In winkelwagen</button>
+            <button onclick="addToCart(@product.Id)" class="btn btn-primary btn-lg mt-4">In winkelmand</button>
         </div>
     </div>
 </div>

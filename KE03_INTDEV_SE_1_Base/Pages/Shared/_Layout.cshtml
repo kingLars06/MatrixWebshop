@@ -41,7 +41,25 @@
             &copy; 2025 - Matrix Inc. - <a asp-area="" asp-page="/Producten">Producten</a>
         </div>
     </footer>
-
+    <!-- Winkelmandje modal -->
+    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cartModalLabel">Product toegevoegd!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Sluiten"></button>
+                </div>
+                <div class="modal-body" id="cartModalBody">
+                    <!-- Hier komt het winkelmandje overzicht -->
+                    Je hebt nu 0 producten in je winkelmandje (€0,00).
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Verder winkelen</button>
+                    <a href="/Winkelmand" class="btn btn-primary">Ga naar winkelmandje</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
