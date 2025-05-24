@@ -35,13 +35,13 @@
     <div class="container py-4">
         <div class="row g-4">
             <div class="col-md-4">
-                <img src="../imgs/sfeer1.jpg" class="img-fluid rounded shadow-sm" alt="Matrix sfeer 1">
+                <img src="../imgs/sfeer1.jpg" class="img-fluid rounded shadow-sm" alt="Matrix sfeer 1" style="object-fit:cover; height:100%;">
             </div>
-            <div class="col-md-4">
-                <img src="../imgs/sfeer2.jpg" class="img-fluid rounded shadow-sm" alt="Matrix sfeer 2">
+            <div class="col-md-4 height-100">
+                <img src="../imgs/sfeer2.jpg" class="img-fluid rounded shadow-sm" alt="Matrix sfeer 2" style="object-fit:cover; height:100%;">
             </div>
-            <div class="col-md-4">
-                <img src="../imgs/sfeer3.webp" class="img-fluid rounded shadow-sm" alt="Matrix sfeer 3">
+            <div class="col-md-4 height-100s">
+                <img src="../imgs/sfeer3.webp" class="img-fluid rounded shadow-sm" alt="Matrix sfeer 3" style="object-fit:cover; height:100%;">
             </div>
         </div>
     </div>
@@ -52,21 +52,5 @@
         <a href="/Producten" class="btn btn-outline-success btn-lg mt-3">Bekijk het aanbod</a>
     </div>
 </div>
-<div class="container-fluid p-0">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Klant</th>
-                <th>Aantal Orders</th>
-            </tr>
-        </thead>
-        @foreach (var c in Model.Customers)
-        {
-            <tr>
-                <td>@Html.DisplayName(c.Name)</td>
-                <td>@Html.DisplayName(c.Orders.Count.ToString())</td>
-            </tr>
-        }
-    </table>
-</div>
+
 
