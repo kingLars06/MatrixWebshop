@@ -19,15 +19,18 @@
     <p>Hier kun je je adres, betaalmethode en overige gegevens invullen.</p>
 
     <!-- Hier zou jouw formulier komen -->
-    <form onsubmit="verwerkBestelling(event)">
-
+    <form method="post">
+        @Html.AntiForgeryToken()
+        <div style="display: none;">
+            <input type="text" name="CartData" id="cart-data" value="" />
+        </div>
         <div class="mb-3">
-            <label for="naam" class="form-label">Naam</label>
+            <label for="naam" class="form-label">Gebruikersnaam</label>
             <input type="text" value="@gebruikersNaam" id="naam" class="form-control" required>
         </div>
         <div class="mb-3">
             <label for="adres" class="form-label">Adres</label>
-            <input type="text" value="@(Model.Customer != null ? Model.Customer.Address : "")" id="adres" class="form-control" required>
+            <input type="text" value="@(Model.Customer != null ? Model.Customer.Address : "")" id="adres"  class="form-control" required>
         </div>
         <!-- ... andere velden zoals email, betaalmethode, etc. -->
         <button type="submit"  class="btn btn-primary">Bestelling plaatsen</button>
@@ -119,6 +122,8 @@
             </div>`;
 
         container.innerHTML = html;
+        document.getElementById("cart-data").value = JSON.stringify(cart);
+
     }
 
     function saveCart() {

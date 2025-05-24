@@ -1,0 +1,24 @@
+﻿@page
+@model KE03_INTDEV_SE_1.Pages.BedanktModel
+@{
+}
+
+
+
+<h1>Bedankt voor je bestelling!</h1>
+
+@foreach (var order in Model.Orders)
+{
+    <div class="mb-4">
+        <strong>Bestelling @order.Id</strong><br />
+        Datum: @order.OrderDate<br />
+        Klant ID: @order.CustomerId<br />
+
+        <ul>
+            @foreach (var product in order.Products)
+            {
+                <li>@product.Name (ID: @product.Id)</li>
+            }
+        </ul>
+    </div>
+}
