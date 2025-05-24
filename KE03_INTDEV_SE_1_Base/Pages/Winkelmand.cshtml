@@ -1,0 +1,183 @@
+﻿@page
+@model KE03_INTDEV_SE_1.Pages.WinkelmandModel
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    ViewData["Title"] = "Winkelmand";
+    var allProductsJson = Json.Serialize(Model.Product);
+	var gebruikersNaam = HttpContextAccessor.HttpContext.Session.GetString("Gebruikersnaam");
+    var isIngelogd = !string.IsNullOrEmpty(gebruikersNaam);
+
+}
+
+<div id="winkelmandContainer"></div>
+<button class="btn btn-primary mt-4" onclick="naarAfrekenen()" style="display:block; margin-left:auto;">
+    Ga door naar afrekenen
+</button>
+<div id="afrekenSectie" class="mt-5" style="display: none;">
+    <h3>Gegevens controleren en betalen</h3>
+    <p>Hier kun je je adres, betaalmethode en overige gegevens invullen.</p>
+
+    <!-- Hier zou jouw formulier komen -->
+    <form onsubmit="verwerkBestelling(event)">
+
+        <div class="mb-3">
+            <label for="naam" class="form-label">Naam</label>
+            <input type="text" value="@gebruikersNaam" id="naam" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="adres" class="form-label">Adres</label>
+            <input type="text" value="@(Model.Customer != null ? Model.Customer.Address : "")" id="adres" class="form-control" required>
+        </div>
+        <!-- ... andere velden zoals email, betaalmethode, etc. -->
+        <button type="submit"  class="btn btn-primary">Bestelling plaatsen</button>
+    </form>
+</div>
+
+<div class="modal fade" id="loginPopup" aria-labelledby="cartModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cartModalLabel">Je bent niet ingelogd</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Sluiten"></button>
+            </div>
+            <div class="modal-body">
+                Log in of meld je aan om verder te gaan met afrekenen.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Aanmelden</button>
+                <a href="/Account/Login" class="btn btn-primary">Inloggen</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    const AllProducts = @Html.Raw(allProductsJson);
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    function renderCart() {
+        const container = document.getElementById("winkelmandContainer");
+        if (cart.length === 0) {
+            container.innerHTML = `<div class="alert alert-info mt-4">Je winkelmand is leeg.</div>`;
+            return;
+        }
+
+        let subtotaal = 0;
+        let html = `
+            <h2>Winkelmand</h2>
+            <table class="table align-middle mt-4">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Naam</th>
+                        <th>Prijs</th>
+                        <th>Aantal</th>
+                        <th>Actie</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+
+        cart.forEach((item, index) => {
+            const product = AllProducts.find(p => p.id === item.id);
+            if (!product) return;
+
+            subtotaal += product.price * item.quantity;
+
+            html += `
+                <tr>
+                    <td style="width: 50px;">
+                        <img src="../imgs/sfeer1.jpg" class="img-fluid rounded" style="max-height: 50px;" />
+                    </td>
+                    <td>${product.name}</td>
+                    <td>€ ${product.price.toFixed(2)}</td>
+                    <td>
+                        <div class="input-group" style="max-width: 120px;">
+                            <button class="btn btn-outline-secondary" onclick="changeQuantity(${item.id}, -1)">-</button>
+                            <input type="text" pattern="\d*" inputmode="numeric" class="form-control text-center" min="0" value="${item.quantity}"
+                                   onchange="setQuantity(${item.id}, this.value)">
+                            <button class="btn btn-outline-secondary" onclick="changeQuantity(${item.id}, 1)">+</button>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="btn" onclick="removeItem(${item.id})">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                  <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                                </svg>
+                        </button>
+                    </td>
+                </tr>`;
+        });
+
+        html += `
+                </tbody>
+            </table>
+            <div class="text-end mt-4">
+                <p><strong>Subtotaal:</strong> € ${subtotaal.toFixed(2)}</p>
+                <p><strong>Verzendkosten:</strong> € 10,00</p>
+                <h4><strong>Totaal:</strong> € ${(subtotaal + 10).toFixed(2)}</h4>
+            </div>`;
+
+        container.innerHTML = html;
+    }
+
+    function saveCart() {
+        localStorage.setItem("cart", JSON.stringify(cart));
+        renderCart();
+    }
+
+    function changeQuantity(productId, delta) {
+        const item = cart.find(x => x.id === productId);
+        if (item) {
+            item.quantity += delta;
+            if (item.quantity < 1) {
+                removeItem(productId);
+            } else {
+                saveCart();
+            }
+        }
+    }
+
+    function setQuantity(productId, newValue) {
+        const quantity = parseInt(newValue);
+        if (isNaN(quantity) || quantity < 1) {
+            removeItem(productId);
+            return;
+        }
+        const item = cart.find(x => x.id === productId);
+        if (item) {
+            item.quantity = quantity;
+            saveCart();
+        }
+    }
+
+    function removeItem(productId) {
+        cart = cart.filter(x => x.id !== productId);
+        saveCart();
+    }
+
+    // init
+    renderCart();
+
+    function naarAfrekenen(e) {
+        console.log("btn clicked")
+        if("@isIngelogd" === "True"){
+            document.getElementById("afrekenSectie").style.display = "block";
+            this.style.display = "none";
+            // get the user data from the username 
+
+            
+        } else {
+            // laat gebruiker zien dat die nog moet inloggen.
+            // document.getElementById("loginPopup").style.display = "block";
+                var modal = new bootstrap.Modal(document.getElementById('loginPopup'));
+                modal.show();
+        }
+    }
+</script>
+
+
+@* @if (!string.IsNullOrEmpty(Model.CartJson)) *@
+@* { *@
+@*     <pre>@Model.CartJson</pre> *@
+@* } *@
