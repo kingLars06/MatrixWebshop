@@ -23,21 +23,6 @@
     <a href="/Index" class="btn btn-primary mt-4">Ga naar homepage</a>
 </div>
 
-
-@*
-
-@foreach (var order in Model.Orders)
-{
-    <div class="mb-4">
-        <strong>Bestelling @order.Id</strong><br />
-        Datum: @order.OrderDate<br />
-        Klant ID: @order.CustomerId<br />
-
-        <ul>
-            @foreach (var product in order.Products)
-            {
-                <li>@product.Name (ID: @product.Id)</li>
-            }
-        </ul>
-    </div>
-}*@
+<script>
+    localStorage.removeItem("cart");
+</script>

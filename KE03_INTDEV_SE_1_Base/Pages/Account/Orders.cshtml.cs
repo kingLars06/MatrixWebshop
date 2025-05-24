@@ -35,6 +35,11 @@ namespace KE03_INTDEV_SE_1.Pages.Account
                         .ToList();
                 }
             }
+            else
+            {
+                // Redirect to login page if user is not logged in
+                Response.Redirect("/Account/Login");
+            }
         }
     }
 }

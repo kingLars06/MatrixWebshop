@@ -96,6 +96,7 @@ namespace KE03_INTDEV_SE_1.Pages
                 }
             }
             // Sla de bestelling op in de database
+
             _orderRepository.AddOrder(order);
 
 
