@@ -5,7 +5,26 @@
 
 
 
-<h1>Bedankt voor je bestelling!</h1>
+@{
+    ViewData["Title"] = "Bedankt";
+}
+
+<div class="container text-center mt-5">
+    <h1 class="display-4">Bedankt, @(Model.Naam). We gaan er mee aan de slag.</h1>
+    <p class="lead mt-3">
+        We hebben je bestelling ontvangen. We zijn je pakket aan het voorbereiden,
+        dus je ontvangt binnenkort een verzendbevestiging van ons.
+    </p>
+
+
+    <div class="mt-5">
+        <img src="../imgs/sfeer4.jpg" class="img-fluid rounded" alt="Sfeervolle afbeelding">
+    </div>
+    <a href="/Index" class="btn btn-primary mt-4">Ga naar homepage</a>
+</div>
+
+
+@*
 
 @foreach (var order in Model.Orders)
 {
@@ -21,4 +40,4 @@
             }
         </ul>
     </div>
-}
+}*@

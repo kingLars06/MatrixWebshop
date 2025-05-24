@@ -39,6 +39,13 @@ namespace DataAccessLayer.Repositories
         {
             return _context.Orders.Include(o => o.Customer).FirstOrDefault(o => o.Id == id);
         }
+        public IEnumerable<Order> GetOrdersByCustomerId(int customerId)
+        {
+            return _context.Orders
+                .Where(o => o.CustomerId == customerId)
+                .Include(o => o.Products)
+                .ToList();
+        }
 
         public void UpdateOrder(Order order)
         {
