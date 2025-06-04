@@ -11,7 +11,7 @@
         @foreach (var c in Model.Product)
         {
             <div class="card" onclick="window.location.href = '/Product?id=@c.Id'" style="width: 18rem; cursor:pointer; padding-bottom:30px; margin-bottom: 10px">
-                <img src="../imgs/sfeer1.jpg" class="card-img-top" alt="...">
+                <img src="@c.ImageURL" style="height:200px;object-fit:cover;" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">@c.Name <span class="float-end">@c.Price</span></h5>
                     <p class="card-text flex-grow-1 mb-2">@c.Description</p>
