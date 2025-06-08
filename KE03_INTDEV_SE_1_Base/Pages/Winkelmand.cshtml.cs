@@ -88,11 +88,8 @@ namespace KE03_INTDEV_SE_1.Pages
                 var product = _productRepository.GetProductById(item.id);
                 if (product != null)
                 {
-                    // quantity van het product omzetten naar losse producten
-                    for (int i = 0; i < item.quantity; i++)
-                    {
-                        order.Products.Add(product);
-                    }
+                    order.Products.Add(product);
+                    // Hier kun je eventueel extra logica toevoegen, zoals het bijhouden van de hoeveelheid
                 }
             }
             // Sla de bestelling op in de database
