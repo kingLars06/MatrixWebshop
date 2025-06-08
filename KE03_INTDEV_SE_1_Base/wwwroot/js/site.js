@@ -1,24 +1,4 @@
-﻿//function addToCart(productId, name, price) {
-//    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-//    // Voeg product toe
-//    cart.push({ id: productId, name: name, price: price });
-//    localStorage.setItem('cart', JSON.stringify(cart));
-
-//    // Tel aantal en totaalbedrag op
-//    const totalItems = cart.length;
-
-
-//    // Toon gegevens in modal
-//    const body = document.getElementById('cartModalBody');
-//    body.innerText = `Je hebt nu ${totalItems} product${totalItems === 1 ? '' : 'en'} in je winkelmandje.`;
-
-//    // Toon modal
-//    const modal = new bootstrap.Modal(document.getElementById('cartModal'));
-//    modal.show();
-//}
-
-function addToCart(productId, name, price) {
+﻿function addToCart(productId, name, price) {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
     // Zoek of het product al in de winkelmand zit
@@ -45,4 +25,20 @@ function addToCart(productId, name, price) {
     // Toon de modal
     const modal = new bootstrap.Modal(document.getElementById('cartModal'));
     modal.show();
+    updateCartCounter();
 }
+
+function updateCartCounter() {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Aantal producten berekenen
+    const totalQuantity = cart.reduce((sum, p) => sum + p.quantity, 0);
+
+    const cartCountEl = document.getElementById("cart-count");
+
+    if (totalQuantity > 0) {
+        cartCountEl.textContent = totalQuantity;
+        cartCountEl.classList.remove("d-none");
+    }
+}
+updateCartCounter();
